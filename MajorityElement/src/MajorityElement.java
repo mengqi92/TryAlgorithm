@@ -9,20 +9,7 @@ public class MajorityElement {
 
     public static int majorityElement(int[] num) {
         quicksort(num, 0, num.length - 1);
-        int previous = num[0];
-        int count = 0;
-        for (int i = 1; i < num.length; i++) {
-            if (num[i] == previous) {
-                if (++count >= num.length / 2) {
-                    return num[i];
-                }
-                previous = num[i];
-            } else {
-                previous = num[i];
-                count=0;
-            }
-        }
-        return 0;
+        return num[num.length/2];
     }
 
     public static void quicksort(int[] num, int left, int right) {

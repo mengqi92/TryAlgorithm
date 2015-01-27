@@ -19,11 +19,11 @@
         return result;
     }
 
-    public static void main(String[] args) {
-        System.out.println(titleToNumber("A"));
-        System.out.println(titleToNumber("B"));
-        System.out.println(titleToNumber("D"));
-        System.out.println(titleToNumber("AA"));
-        System.out.println(titleToNumber("AB"));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(titleToNumber("A"));
+//        System.out.println(titleToNumber("B"));
+//        System.out.println(titleToNumber("D"));
+//        System.out.println(titleToNumber("AA"));
+//        System.out.println(titleToNumber("AB"));
+//    }
 }
