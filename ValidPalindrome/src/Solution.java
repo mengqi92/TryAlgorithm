@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
  For the purpose of this problem, we define empty string as valid palindrome.
  */
+//374ms
 public class Solution {
     public boolean isPalindrome(String s) {
         //过滤所有非字母字符
