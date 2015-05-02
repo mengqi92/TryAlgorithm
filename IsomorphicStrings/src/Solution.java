@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -15,43 +14,55 @@ import java.util.HashMap;
  Given "foo", "bar", return false.
 
  Given "paper", "title", return true.
- 429 ms
+ 362 ms
  */
 public class Solution {
     public boolean isIsomorphic(String s, String t) {
-        ArrayList<Integer> PosListS = getStringStructure(s);
-        ArrayList<Integer> PosListT = getStringStructure(t);
+        if (s.length() != t.length())
+            return false;
 
-
-        return PosListS.equals(PosListT);
-    }
-
-    public ArrayList<Integer> getStringStructure(String string) {
-        //存放字符串的结构，每个元素为字符对应的ID值
-        ArrayList<Integer> PosList = new ArrayList<Integer>();
         //记录已出现的字符，并为每个字符分配一个ID，即该字符第一次出现位置
         HashMap<Character, Integer> charPosS = new HashMap<Character, Integer>();
-        for (int i = 0; i < string.length(); i++) {
-            char c = string.charAt(i);
+        HashMap<Character, Integer> charPosT = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); i++) {
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
             //新出现字符
-            if (!charPosS.containsKey(c)) {
-                charPosS.put(c, i);  //为新出现字符分配ID为i
-                PosList.add(i);    //将新分配ID存入字符串结构中
+            if (!charPosS.containsKey(sc)) {
+                if (!charPosT.containsKey(tc)) {    //s串新词，则t串也须为新词才同构
+                    charPosS.put(sc, i);  //为新出现字符分配ID为i
+                    charPosT.put(tc, i);
+                } else {
+                    return false;
+                }
             } else {    //字符已存在
-                PosList.add(charPosS.get(c));
+                if (charPosT.containsKey(tc)) {
+                    if (charPosS.get(sc) != charPosT.get(tc))
+                        return false;
+                } else {
+                    return false;
+                }
             }
         }
-//
-//        System.out.println("string = " + string);
-//        for (int i = 0; i < PosList.size(); i++) {
-//            System.out.print(PosList.get(i) + ",");
-//        }
-//        System.out.println();
-        return PosList;
+        return true;
     }
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        System.out.println("是否同构?" + solution.isIsomorphic("paper", "title"));
+        String s = "paper", t = "title";
+        System.out.println("'"+s+"':'"+t+"'是否同构?\t" + solution.isIsomorphic(s,t));
+        s = new String("paper");
+        t = new String("white");
+        System.out.println("'"+s+"':'"+t+"'是否同构?\t" + solution.isIsomorphic(s,t));
+        s = new String("");
+        t = new String("s");
+        System.out.println("'"+s+"':'"+t+"'是否同构?\t" + solution.isIsomorphic(s,t));
+        s = new String("");
+        t = new String("");
+        System.out.println("'"+s+"':'"+t+"'是否同构?\t" + solution.isIsomorphic(s,t));
+        s = new String("s");
+        t = new String("t");
+        System.out.println("'"+s+"':'"+t+"'是否同构?\t" + solution.isIsomorphic(s,t));
+
     }
 }
